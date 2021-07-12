@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     this.service.getEmployee().subscribe(
       (response: Employee[]) => {
         this.employees = response;
+        console.log(this.employees)
       },
       (err: HttpErrorResponse) => {
         alert(err.message);
