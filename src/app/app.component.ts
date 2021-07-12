@@ -9,7 +9,7 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public employees: Employee[];
+  public employees: Employee[] = [];
 
   //inject service here
   constructor(private service: EmployeeService) {

@@ -2,13 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs";
 import { Employee } from "./employee";
+import { environment } from "src/environments/environment";
 
+//provideIn: 'root' is app.module.ts
+//or you can include the class on `providers` section
 @Injectable({
     providedIn: 'root'
 })
 
 export class EmployeeService {
-    private apiServerUrl = '';
+    private apiServerUrl = environment.apiBaseUrl;
 
     constructor(private client: HttpClient) { }
 
