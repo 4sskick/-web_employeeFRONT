@@ -11,6 +11,7 @@ import { EmployeeService } from './employee.service';
 })
 export class AppComponent implements OnInit {
   public employees: Employee[] = [];
+  public selectedEmployee: any = {};
 
   //inject service here
   constructor(private service: EmployeeService) {
@@ -48,6 +49,7 @@ export class AppComponent implements OnInit {
     if (mode === 'add') {
       button.setAttribute('data-target', '#employeeModalAdd');
     } else if (mode === 'edit') {
+      this.selectedEmployee = employee;
       button.setAttribute('data-target', '#employeeModalEdit');
     } else if (mode === 'delete') {
       button.setAttribute('data-target', '#employeeModalDelete');
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit {
     //close modal after 'save changes' button clicked
     document.getElementById("add-employee-form")?.click();
 
+    //modalAddForm.value representing the whole value in field which already filled as JSON
     this.service.addEmployee(modalAddForm.value)
       .subscribe(
         (respond: Employee) => {
@@ -75,6 +78,21 @@ export class AppComponent implements OnInit {
           alert(error.message);
         }
       )
+
+  }
+
+  public onEditEmployee(employee: Employee): void {
+
+    this.service.updateEmployee(employee)
+      .subscribe(
+        (respond: Employee) => {
+          console.log(respond);
+          this.getEmployees();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
 
   }
 }
