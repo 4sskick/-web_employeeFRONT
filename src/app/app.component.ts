@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
   //ref: https://getbootstrap.com/docs/4.6/components/modal/#modal-components
   //section: live demo below `Modal Example`
-  public openModalOnMode(employee: Employee, mode: string) {
+  public openModalOnMode(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
 
