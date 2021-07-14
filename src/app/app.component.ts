@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -57,5 +58,23 @@ export class AppComponent implements OnInit {
 
     //invoke action click on button
     button.click();
+  }
+
+  public onAddEmployee(modalAddForm: NgForm): void {
+
+    //close modal after 'save changes' button clicked
+    document.getElementById("add-employee-form")?.click();
+
+    this.service.addEmployee(modalAddForm.value)
+      .subscribe(
+        (respond: Employee) => {
+          console.log(respond);
+          this.getEmployees();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      )
+
   }
 }
